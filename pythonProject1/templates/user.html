@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户个人信息</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .page-header {
+            max-width: 300px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        a {
+            color: #006400;
+        }
+        .post {
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            max-width: 300px;
+        }
+        .nav{
+            width: 100%;
+            height: 60px;
+            background-color: #006600;
+            margin-left: 0;
+            display: block;
+            margin-bottom: 0;
+        }
+        a{
+            text-decoration: none;
+        }
+        .nav ul li{
+            float: left;
+            list-style-type: none;
+            padding: 0 50px ;
+            line-height: 60px;
+
+        }
+        .nav>ul>li>a {
+            color:lightgray;
+            font-size: 20px;
+        }
+
+        .学部食堂{
+            position: absolute;
+            padding-left: 0;
+            margin-top:0;
+            height:60px;
+            width: 100%;
+            left:0;
+            background-color: rgb(249,249,248);
+            border-left: 1px solid black;
+            border-right: 1px solid black;
+            border-bottom: 1px solid gray;
+            overflow: hidden;
+            clear: both;
+            display: none;
+        }
+        .学部食堂 ul{
+            position: absolute;
+            left:0;
+
+            overflow: hidden;
+            clear: both;
+            z-index: 200;
+        }
+        .学部食堂 ul li{
+            list-style-type: none;
+            float: left;
+            margin-left: 0;
+
+        }
+        .学部食堂 ul li a{
+            color: black;
+            font-size: 15px;
+            padding-left: 100px;
+
+        }
+        .食堂概况:hover>.学部食堂{
+            display: block;
+            z-index: 200;
+        }
+        .食堂概况:hover>.学部食堂>ul>li>a:hover{
+            color: darkgreen;
+        }
+        .nav>ul>li>a:hover{
+            color: white;
+        }
+        .用户{
+            position: absolute;
+            right:10px;
+
+        }
+        .nav-item1{
+            position: absolute;
+            right:280px;
+            font-size: 20px;
+            font-weight:700;
+            font-family:"Microsoft JhengHei";
+            width:100px;
+            display:block;
+        }
+        .nav-link3{
+            position: absolute;
+            right:200px;
+            font-size: 2px;
+            font-weight:700;
+            font-family:"Microsoft JhengHei";
+            width:80px;
+            display:block;
+        }
+    </style>
+</head>
+<body>
+<div class = "nav">
+    <ul>
+        <li class = "食堂概况">   <!-- 这里看每个学部的食堂-->
+            <a href="#">食堂概况</a>
+            <div class="学部食堂">
+                <ul >
+                    <li><a href="#">工学部食堂</a></li>
+                    <li><a href="#">文理学部食堂</a></li>
+                    <li><a href="#">信息学部食堂</a></li>
+                    <li><a href="#">医学部食堂</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class = "发现">   <!-- 这里是发帖子，看帖子区-->
+            <a href="/post">发现</a>
+        </li >
+
+        <li class = "我的">
+            {% if user %}
+            <a href="{{ url_for('user.view', username=user.username) }}"> 我的</a>
+            {% endif %}
+        </li>
+        <li class = "用户" >
+            <a href="/"><img src="../static/images/标志.png" alt = "user" height = 60px ></a>
+        </li>
+    </ul>
+    <ul class="navbar-nav">
+        {% if user %}
+        <li class="nav-item1">
+            <sqan class="nav-link" >{{user.username}}</sqan>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link3" href="{{ url_for('user.logout') }}">退出登录</a>
+            {% else %}
+        <li class="nav-item">
+            <a class="nav-link1" href="{{ url_for('user.login') }}">登录</a>
+        </li>
+        <li class="nav-item2">
+            <a class="nav-link2" href="{{ url_for('user.register') }}">注册</a>
+        </li>
+        {% endif %}
+    </ul>
+</div>
+    {% block page_content %}
+    <div class="page-header">
+        <h1>{{ user.username }}</h1>
+        <p>Email: {{ user.email }}</p>
+        {% if user.name or user.location %}
+        <p>
+            {% if user.name %}Name: {{ user.name }}{% endif %}
+        </p>
+        {% endif %}
+        <p><a href="mailto:{{ user.email }}"></a></p>
+        {% if user.about_me %}
+        <p>
+            About me: {{ user.about_me }}
+        </p>
+        {% endif %}
+        <p>
+            Member since: {{user.join_time}}.
+        </p>
+    </div>
+
+    <!-- 用户发的贴子 -->
+    {% for post in user.posts %}
+    <div class="post">
+        <h2><a href="{{url_for('post.bc_detail',bc_id=post.id)}}">{{ post.title }}</a></h2>
+        <p>{{ post.content }}</p>
+        <p>Posted on: {{ post.create_time}}</p>
+    </div>
+    {% endfor %}
+
+    {% endblock %}
+</body>
+</html>
+
+
+

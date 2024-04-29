@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>用户评论展示</title>
+    <style>
+        .slash{
+            width:2px;
+            height:60px;
+            position: absolute;
+            background-color: #006600;
+            margin-top: -10px;
+        }
+        h1{
+            margin-left: 10px;
+            font-weight: lighter;
+            color: #578984;
+        }
+        .user-comment {
+            border: 1px solid green;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+
+        }
+        .user-comment h3 {
+            margin: 0 10px 0 0;
+        }
+        .stars {
+            display: flex;
+        }
+        .star {
+            font-size: 20px;
+            color: #FFD700;
+        }
+        .fa-star-o {
+            color: #ddd;
+        }
+    </style>
+    <!-- 引入FontAwesome CSS文件 -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+</head>
+<body>
+
+<div class="comments">
+    <div class="slash"></div>
+    <h1>用户评论</h1>
+
+    <!-- 用户评论区域 -->
+    <div id="comments-container">
+        <!-- 动态插入评论 -->
+    </div>
+
+    <!-- 引入JavaScript文件 -->
+    <script src="../static/js/评论.js"></script>
+</div>
+
+</body>
+</html>
+

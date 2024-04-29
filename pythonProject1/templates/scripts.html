@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>用户评论展示</title>
+    <style>
+
+        .user-comment {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .user-comment h3 {
+            margin: 0 0 10px 0;
+        }
+        .rating {
+            margin-bottom: 10px;
+        }
+        .rating-star {
+            color: #FFD700;
+            text-shadow: 0 1px 0 #333;
+        }
+        .rating-star:before {
+            color: #F0EAD6;
+            content: "\f005\f005\f005\f005\f005";
+            font-family: FontAwesome;
+        }
+        .add-comment-btn {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>用户评论</h1>
+
+    <!-- 用户评论区域 -->
+    <div class="user-comment">
+        <h3>张三</h3>
+        <div class="rating">
+            <span class="rating-star">&#xf005;</span>
+            <span class="rating-star">&#xf005;</span>
+            <span class="rating-star">&#xf005;</span>
+            <span class="rating-star">&#xf005;</span>
+            <span class="rating-star">&#xf005;</span>
+        </div>
+        <p>商品很不错，物流也很快，下次还会购买！</p>
+    </div>
+
+    <!-- 添加评论按钮 -->
+    <div class="add-comment-btn">
+        <button>添加我的评论</button>
+    </div>
+
+</div>
+
+</body>
+</html>
+

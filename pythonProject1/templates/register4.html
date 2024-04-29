@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册页面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            background-image:url("../static/images/2.jpg");
+            background-size:cover ;
+        }
+        form {
+            width: 650px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            position:absolute;
+            right:100px;
+            top:200px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        div {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="email"], input[type="password"] {
+            width: 70%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button, input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #006400;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover, input[type="submit"]:hover {
+            background-color: #004d00;
+        }
+        .nav{
+            width: 100%;
+            height: 60px;
+            background-color: #006600;
+            margin-left: 0;
+            display: block;
+            margin-bottom: 0;
+        }
+        a{
+            text-decoration: none;
+        }
+        .nav ul li{
+            float: left;
+            list-style-type: none;
+            padding: 0 50px ;
+            line-height: 60px;
+
+        }
+        .nav>ul>li>a {
+            color:lightgray;
+            font-size: 20px;
+        }
+
+        .学部食堂{
+            position: absolute;
+            padding-left: 0;
+            margin-top:0;
+            height:60px;
+            width: 100%;
+            left:0;
+            background-color: rgb(249,249,248);
+            border-left: 1px solid black;
+            border-right: 1px solid black;
+            border-bottom: 1px solid gray;
+            overflow: hidden;
+            clear: both;
+            display: none;
+        }
+        .学部食堂 ul{
+            position: absolute;
+            left:0;
+
+            overflow: hidden;
+            clear: both;
+            z-index: 200;
+        }
+        .学部食堂 ul li{
+            list-style-type: none;
+            float: left;
+            margin-left: 0;
+
+        }
+        .学部食堂 ul li a{
+            color: black;
+            font-size: 15px;
+            padding-left: 100px;
+
+        }
+        .食堂概况:hover>.学部食堂{
+            display: block;
+            z-index: 200;
+        }
+        .食堂概况:hover>.学部食堂>ul>li>a:hover{
+            color: darkgreen;
+        }
+        .nav>ul>li>a:hover{
+            color: white;
+        }
+        .用户{
+            position: absolute;
+            right:10px;
+
+        }
+    </style>
+</head>
+<body>
+<div class = "nav">
+    <ul>
+        <li class = "食堂概况">   <!-- 这里看每个学部的食堂-->
+            <a href="#">食堂概况</a>
+            <div class="学部食堂">
+                <ul >
+                    <li><a href="#">工学部食堂</a></li>
+                    <li><a href="#">文理学部食堂</a></li>
+                    <li><a href="#">信息学部食堂</a></li>
+                    <li><a href="#">医学部食堂</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class = "发现">   <!-- 这里是发帖子，看帖子区-->
+            <a href="/post">发现</a>
+        </li >
+
+        <li class = "我的">
+            {% if user %}
+            <a href="{{ url_for('user.view', username=user.username) }}"> 我的</a>
+            {% endif %}
+        </li>
+        <li class = "用户" >
+            <a href="/"><img src="../static/images/标志.png" alt = "user" height = 60px ></a>
+        </li>
+    </ul>
+    <ul class="navbar-nav">
+        {% if user %}
+        <li class="nav-item1">
+            <sqan class="nav-link" >{{user.username}}</sqan>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link1" href="{{ url_for('user.login') }}">登录</a>
+        </li>
+
+        {% endif %}
+    </ul>
+</div>
+    <h2>注册</h2>
+    <form action="#" method="post">
+        <div>
+            <label for="username">用户名:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div>
+            <label for="email">邮箱:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+            <label for="verification-code">验证码:</label>
+            <input type="text" id="verification-code" name="captcha" required>
+            <button type="button" onclick="getVerificationCode()">获取验证码</button>
+        </div>
+        <div>
+            <label for="password">密码:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div>
+            <label for="confirm_password">确认密码:</label>
+            <input type="password" id="confirm_password" name="password_confirm" required>
+        </div>
+        <div>
+            <input type="submit" value="提交">
+        </div>
+    </form>
+    <script>
+function getVerificationCode() {
+    // 获取邮箱输入框的值
+    var email = document.getElementById('email').value;
+
+    // 发送请求到服务器获取验证码
+    fetch("/user/captcha/email?email=" + email, {
+        method: 'GET',
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('验证码已发送到你的邮箱');
+        } else {
+            alert('获取验证码失败：' + data.message);
+        }
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+    </script>
+</body>
+</html>
+
+

@@ -1,0 +1,319 @@
+{% block head %}
+<meta charset="utf-8">
+<style>
+    .nav{
+        width: 100%;
+        height: 60px;
+        background-color: #006600;
+        margin-left: 0;
+        display: block;
+        margin-bottom: 0;
+    }
+    a{
+        text-decoration: none;
+    }
+    .nav ul li{
+        float: left;
+        list-style-type: none;
+        padding: 0 50px ;
+        line-height: 60px;
+
+    }
+    .nav>ul>li>a {
+        color:lightgray;
+        font-size: 20px;
+    }
+
+    .学部食堂{
+        position: absolute;
+        padding-left: 0;
+        margin-top:0;
+        height:60px;
+        width: 100%;
+        left:0;
+        background-color: rgb(249,249,248);
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+        border-bottom: 1px solid gray;
+        overflow: hidden;
+        clear: both;
+        display: none;
+    }
+    .学部食堂 ul{
+        position: absolute;
+        left:0;
+
+        overflow: hidden;
+        clear: both;
+        z-index: 200;
+    }
+    .学部食堂 ul li{
+        list-style-type: none;
+        float: left;
+        margin-left: 0;
+
+    }
+    .学部食堂 ul li a{
+        color: black;
+        font-size: 15px;
+        padding-left: 100px;
+
+    }
+    .食堂概况:hover>.学部食堂{
+        display: block;
+        z-index: 200;
+    }
+    .食堂概况:hover>.学部食堂>ul>li>a:hover{
+        color: darkgreen;
+    }
+    .nav>ul>li>a:hover{
+        color: white;
+    }
+    .用户{
+        position: absolute;
+        right:10px;
+
+    }
+        .row .col-10{
+            position: relative;
+            top:50px;
+            margin: 20px 40px;
+            border: #0c5460;
+            width:90%;
+            height:500px;
+            border-radius: 40px;
+
+        }
+        .side-blog img{
+            width:60px;
+            height:60px;
+        }
+        .btn-primary{
+            width:80px;
+            height:40px;
+            background-color: #b4ac4d;
+            border-radius:20px;
+            position: relative;
+            top:-50px;
+        }
+        .form-control{
+            height:40px;
+            width:600px;
+            border-radius: 15px;
+
+
+        }
+        .comment-group li{
+            border-radius: 15px;
+            width:90%;
+            height:100px;
+            background: white;
+        }
+        .blog-content{
+            border-radius: 15px;
+            width:90%;
+            height:300px;
+            background: white;
+            font-family: "Microsoft YaHei UI" , "system-ui";
+            font-weight: lighter;
+        }
+        .blog-title{
+            font-size: large;
+            font-weight: bold;
+            font-family: "Arial", sans-serif;
+        }
+        .nav-item1{
+            position: absolute;
+            right:280px;
+            font-size: 20px;
+            font-weight:700;
+            font-family:"Microsoft JhengHei";
+            width:100px;
+            display:block;
+        }
+        .nav-link3{
+            position: absolute;
+            right:200px;
+            font-size: 2px;
+            font-weight:700;
+            font-family:"Microsoft JhengHei";
+            width:80px;
+            display:block;
+        }
+        .nav-link1{
+            position: absolute;
+            right:280px;
+            font-size: 20px;
+            font-weight:700;
+            font-family:"Microsoft JhengHei";
+            width:100px;
+            display:block;
+        }
+        .nav-link2{
+            position: absolute;
+            right:200px;
+            font-size: 2px;
+            font-weight:700;
+            font-family:"Microsoft JhengHei";
+            width:80px;
+            display:block;
+        }
+        .add_content{
+            position:fixed;
+            right:30px;
+            top:700px;
+            width:80px;
+            height:80px;
+            display: block;
+        }
+    .blog-ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .blog-ul li {
+        border-bottom: 1px solid #ddd; /* 添加分隔线 */
+        padding: 20px 0;
+        display: flex;
+        align-items: center;
+    }
+
+    .blog-avatar {
+    margin-right: 20px;
+}
+
+    .side-blog-avatar {
+        border-radius: 50%; /* 使头像为圆形 */
+        width: 60px; /* 头像宽度 */
+        height: 60px; /* 头像高度 */
+    }
+
+    .blog-item {
+    display: flex;
+    align-items: flex-start; /* 使头像和标题在顶部对齐 */
+    border-bottom: 1px solid #ddd; /* 添加分隔线 */
+    padding: 20px 0;
+    height: 150px; /* 降低帖子高度 */
+    background: rgba(240, 240, 240, 0.5); /* 添加灰色半透明背景 */
+}
+
+    .blog-title {
+        color: #333; /* 设置标题颜色 */
+        font-size: 1.5em; /* 增加标题字体大小 */
+        margin-bottom: 10px;
+}
+
+    .blog-title a {
+    color: inherit; /* 保持链接颜色与标题一致 */
+    text-decoration: none; /* 去除下划线 */
+}
+
+    .blog-title a:hover {
+    color: #007bff; /* 鼠标悬停时改变颜色 */
+    text-decoration: underline; /* 鼠标悬停时添加下划线 */
+}
+
+    .blog-content {
+    flex: 1;
+}
+
+    .blog-detail {
+    font-size: 0.9em;
+    color: #999; /* 设置详细信息颜色 */
+}
+
+    .blog-author {
+    margin-right: 20px;
+}
+
+    .write_button {
+    text-align: center;
+    margin-top: 20px;
+}
+
+    .blog-text {
+        color: #666; /* 设置内容颜色 */
+        font-size: 1em;
+        margin-bottom: 10px;
+        overflow: hidden; /* 防止内容溢出 */
+        text-overflow: ellipsis; /* 显示省略号 */
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* 限制显示行数 */
+        -webkit-box-orient: vertical;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class = "nav">
+    <ul>
+        <li class = "食堂概况">   <!-- 这里看每个学部的食堂-->
+            <a href="#">食堂概况</a>
+            <div class="学部食堂">
+                <ul >
+                    <li><a href="#">工学部食堂</a></li>
+                    <li><a href="#">文理学部食堂</a></li>
+                    <li><a href="#">信息学部食堂</a></li>
+                    <li><a href="#">医学部食堂</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class = "发现">   <!-- 这里是发帖子，看帖子区-->
+            <a href="/post">发现</a>
+        </li >
+
+        <li class = "我的">
+            {% if user %}
+            <a href="{{ url_for('user.view', username=user.username) }}"> 我的</a>
+            {% endif %}
+        </li>
+        <li class = "用户" >
+            <a href="/"><img src="../static/images/标志.png" alt = "user" height = 60px ></a>
+        </li>
+    </ul>
+    <ul class="navbar-nav">
+        {% if user %}
+        <li class="nav-item1">
+            <sqan class="nav-link" >{{user.username}}</sqan>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link3" href="{{ url_for('user.logout') }}">退出登录</a>
+            {% else %}
+        <li class="nav-item">
+            <a class="nav-link1" href="{{ url_for('user.login') }}">登录</a>
+        </li>
+        <li class="nav-item2">
+            <a class="nav-link2" href="{{ url_for('user.register') }}">注册</a>
+        </li>
+        {% endif %}
+    </ul>
+</div>
+ <div class="row" style="margin-top: 20px;">
+            <div class="col"></div>
+            <div class="col-10">
+                <ul class="blog-ul">
+                    {% for blog in blogs %}
+                    <li class="blog-item">
+                        <div class="blog-content">
+                            <div class="blog-avatar">
+                            <a href="{{ url_for('user.view', username=blog.author.username) }}"><img class="side-blog-avatar" src="../static/images/avatar.jpg" alt=""></a>
+                        </div>
+                            <div class="blog-title"><a href="{{url_for('post.bc_detail',bc_id=blog.id)}}">{{blog.title}}</a></div>
+                            <div class="blog-text">{{ blog.content }}</div>
+                            <div class="blog-detail">
+                                <span class="blog-author">{{ blog.author.username }}</span>
+                                <span class="blog-time">{{ blog.create_time }}</span>
+                            </div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col"></div>
+        </div>
+    <div class="write_button">
+        <a class="add_content" href="/post/bc/public"><img class="add_content" alt="按钮" src="../static/images/发帖标志.png"></a>
+    </div>
+{% endblock %}
+
+

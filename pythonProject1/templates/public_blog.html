@@ -1,0 +1,251 @@
+{% block head %}
+<meta charset="utf-8">
+<style>
+    .nav{
+        width: 100%;
+        height: 60px;
+        background-color: #006600;
+        margin-left: 0;
+        display: block;
+        margin-bottom: 0;
+    }
+    a{
+        text-decoration: none;
+    }
+    .nav ul li{
+        float: left;
+        list-style-type: none;
+        padding: 0 50px ;
+        line-height: 60px;
+
+    }
+    .nav>ul>li>a {
+        color:lightgray;
+        font-size: 20px;
+    }
+
+    .学部食堂{
+        position: absolute;
+        padding-left: 0;
+        margin-top:0;
+        height:60px;
+        width: 100%;
+        left:0;
+        background-color: rgb(249,249,248);
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+        border-bottom: 1px solid gray;
+        overflow: hidden;
+        clear: both;
+        display: none;
+    }
+    .学部食堂 ul{
+        position: absolute;
+        left:0;
+
+        overflow: hidden;
+        clear: both;
+        z-index: 200;
+    }
+    .学部食堂 ul li{
+        list-style-type: none;
+        float: left;
+        margin-left: 0;
+
+    }
+    .学部食堂 ul li a{
+        color: black;
+        font-size: 15px;
+        padding-left: 100px;
+
+    }
+    .食堂概况:hover>.学部食堂{
+        display: block;
+        z-index: 200;
+    }
+    .食堂概况:hover>.学部食堂>ul>li>a:hover{
+        color: darkgreen;
+    }
+    .nav>ul>li>a:hover{
+        color: white;
+    }
+    .用户{
+        position: absolute;
+        right:10px;
+
+    }
+        .row .col-10{
+            position: relative;
+            top:50px;
+            margin: 20px 40px;
+            border: #0c5460;
+            width:90%;
+            height:500px;
+            border-radius: 40px;
+            background:linear-gradient(45deg, rgba(177, 239, 230, 0.92), rgb(239, 242, 243));
+        }
+
+        .form-control1{
+            width:30%;
+            height:50px;
+            border-radius: 15px;
+            background-color: #f4f0f0;
+            position:relative;
+            left:20px;
+        }
+        .form-control2{
+            width:80%;
+            height:300px;
+            border-radius: 15px;
+            position:relative;
+            left:20px;
+            top:10px;
+        }
+        .btn-primary{
+            width:70px;
+            height:40px;
+            background-color: #d2d262;
+            border-radius: 10px;
+            position: relative;
+            top:-350px;
+            left:-380px;
+        }
+        .btn-primary:active{
+            background-color: #c2c276;
+            box-shadow: inset 5px 5px 10px #d6f1aa;
+        }
+        .nav-link3{
+            position: absolute;
+            right:200px;
+            font-size: 2px;
+            font-weight:700;
+            font-family:"Microsoft JhengHei";
+            width:80px;
+            display:block;
+        }
+        .nav-item1{
+            position: absolute;
+            right:280px;
+            font-size: 20px;
+            font-weight:700;
+            font-family:"Microsoft JhengHei";
+            width:100px;
+            display:block;
+        }
+        /* 设置表单输入框和文本域的样式 */
+.form-group input[type="text"],
+.form-group textarea {
+    width: 70%; /* 设置宽度为100% */
+    padding: 10px; /* 增加内边距 */
+    margin-bottom: 15px; /* 增加外边距 */
+    border: 1px solid #ddd; /* 添加边框 */
+    border-radius: 5px; /* 添加圆角 */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+}
+
+/* 设置按钮的样式 */
+.btn-primary {
+    width: 5%; /* 设置宽度为100% */
+    padding: 10px; /* 增加内边距 */
+    margin-top: 300px; /* 增加外边距 */
+    border: none; /* 移除边框 */
+    border-radius: 5px; /* 添加圆角 */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+    background-color: #d2d262; /* 设置背景颜色 */
+    color: white; /* 设置文字颜色 */
+    font-size: 16px; /* 增加字体大小 */
+    cursor: pointer; /* 添加鼠标指针效果 */
+}
+
+.btn-primary:active {
+    background-color: #c2c276; /* 鼠标按下时背景颜色变化 */
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2); /* 鼠标按下时阴影变化 */
+}
+
+/* 设置页面布局 */
+.row {
+    margin-top: 50px; /* 增加顶部外边距 */
+}
+
+.col-10 {
+    padding: 20px; /* 增加内边距 */
+}
+
+h1 {
+    margin-bottom: 30px; /* 增加下边距 */
+}
+
+/* 添加过渡效果 */
+.form-group,
+.btn-primary {
+    transition: all 0.3s ease;
+}
+        </style>
+{% endblock %}
+{% block body %}
+
+<div class = "nav">
+    <ul>
+        <li class = "食堂概况">   <!-- 这里看每个学部的食堂-->
+            <a href="#">食堂概况</a>
+            <div class="学部食堂">
+                <ul >
+                    <li><a href="#">工学部食堂</a></li>
+                    <li><a href="#">文理学部食堂</a></li>
+                    <li><a href="#">信息学部食堂</a></li>
+                    <li><a href="#">医学部食堂</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class = "发现">   <!-- 这里是发帖子，看帖子区-->
+            <a href="/post">发现</a>
+        </li >
+
+        <li class = "我的">
+            {% if user %}
+            <a href="{{ url_for('user.view', username=user.username) }}"> 我的</a>
+            {% endif %}
+        </li>
+        <li class = "用户" >
+            <a href="/"><img src="../static/images/标志.png" height = 60px ></a>
+        </li>
+    </ul>
+    <ul class="navbar-nav">
+        {% if user %}
+        <li class="nav-item1">
+            <sqan class="nav-link" >{{user.username}}</sqan>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link3" href="{{ url_for('user.logout') }}">退出登录</a>
+            {% else %}
+        <li class="nav-item">
+            <a class="nav-link1" href="{{ url_for('user.login') }}">登录</a>
+        </li>
+        <li class="nav-item2">
+            <a class="nav-link2" href="{{ url_for('user.register') }}">注册</a>
+        </li>
+        {% endif %}
+    </ul>
+</div>
+
+    <div class="row" style="margin-top: 20px;">
+            <div class="col"></div>
+            <div class="col-10">
+                <h1 style="text-align: center;">发布博客</h1>
+                <form action="#" method="post">
+                    <div class="form-group">
+                        <input type="text" name="title" class="form-control1" placeholder="请输入标题">
+                    </div>
+                    <div class="form-group">
+                        <textarea name="content" class="form-control2" rows="10" placeholder="请输入内容"></textarea>
+                    </div>
+                    <div class="form-group" style="text-align: right;">
+                        <button class="btn-primary">发布</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col"></div>
+        </div>
+{% endblock %}
+
+

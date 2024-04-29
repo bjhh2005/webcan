@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width = device-width,initial-scale = 1, maximum-scale = 1, user-scalable = no">
+    <title>食堂评价系统</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .nav{
+            width: 100%;
+            height: 60px;
+            background-color: #006600;
+            margin-left: 0;
+            display: block;
+            margin-bottom: 0;
+        }
+        a{
+            text-decoration: none;
+        }
+        .nav ul li{
+            float: left;
+            list-style-type: none;
+            padding: 0 50px ;
+            line-height: 60px;
+        }
+        .nav>ul>li>a {
+            color:lightgray;
+            font-size: 20px;
+        }
+
+        .学部食堂{
+            position: absolute;
+            padding-left: 0;
+            margin-top:0;
+            height:60px;
+            width: 100%;
+            left:0;
+            background-color: rgb(249,249,248);
+            border-left: 1px solid black;
+            border-right: 1px solid black;
+            border-bottom: 1px solid gray;
+            overflow: hidden;
+            clear: both;
+            display: none;
+        }
+        .学部食堂 ul{
+            position: absolute;
+            left:0;
+
+            overflow: hidden;
+            clear: both;
+            z-index: 200;
+        }
+        .学部食堂 ul li{
+            list-style-type: none;
+            float: left;
+            margin-left: 0;
+
+        }
+        .学部食堂 ul li a{
+            color: black;
+            font-size: 15px;
+            padding-left: 100px;
+
+        }
+        .食堂概况:hover>.学部食堂{
+            display: block;
+            z-index: 200;
+        }
+        .食堂概况:hover>.学部食堂>ul>li>a:hover{
+            color: darkgreen;
+        }
+        .nav>ul>li>a:hover{
+            color: white;
+        }
+        .主页-我的{
+            margin-top: 520px;
+            margin-left: 100px;
+            position: absolute;
+            font-family: "Microsoft YaHei UI","system-ui";
+            display: block;
+            height: 500px;
+            width:309px;
+            border: solid ;
+            border-radius: 20px;
+        }
+        .top{
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin: 0 auto;
+            background-color: rgb(46, 82, 40);
+            height:50px;
+            border-radius: 17px 17px 0 0;
+
+        }
+        h4{
+            margin-top:10px;
+            text-align: center;
+            align-content: center;
+            background-color: white;
+            border: solid rgba(230, 230, 230, 0.95);
+            width: 80px;
+            height:30px;
+            line-height:30px;
+            border-radius: 20px;
+
+        }
+        .饮食摄入{
+            margin-top: 20px;
+
+        }
+
+        .主页-我的 .饮食摄入 .text1{
+
+            color: #3E606F;
+            margin-bottom: 60px;
+            font-size: large;
+        }
+        .主页-我的 .饮食摄入 p{
+            color:#91AA9D;
+            font-family: "Microsoft JhengHei UI Light";
+            font-weight: bolder;
+
+        }
+        .用户{
+            position: absolute;
+            top:1px;
+            right:30px;
+
+            overflow: hidden;
+            clear:both;
+
+        }
+
+        .semi-circle-progress {
+            position: absolute;
+            width: 200px;
+            height: 100px;
+            border-radius: 100px 100px 0 0;
+            background:linear-gradient(-35deg,white,gray);
+            right: 30px;
+            top:70px;
+            overflow: hidden;
+            clear: both;
+        }
+
+        .semi-circle-progress .mask {
+            position: absolute;
+            bottom: 0;
+            left: 19px;
+            width: 80%;
+            height: 80%;
+            border-radius: 80px 80px 0 0;
+            overflow: hidden;
+        }
+
+        .semi-circle-progress .fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 100px 100px 0 0;
+            background-color: #4caf50;
+            transform: rotate(180deg);
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .semi-circle-progress .mask::before,
+        .semi-circle-progress .mask::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 100px 100px 0 0;
+            background-color: #fff;
+        }
+
+        .semi-circle-progress .mask::before {
+            transform: rotate(180deg);
+        }
+        .semi-circle-text{
+            position: absolute;
+            top: 130px;
+            right:90px;
+        }
+        .semi-circle-text h5{
+            color: rgba(102, 202, 102, 0.48);
+            position: relative;
+            top:-31px;
+            left:15px;
+
+        }
+        .semi-circle-text p{
+            color: rgb(46, 82, 40);
+            position: relative;
+            bottom: -8px;
+            font-size: small;
+        }
+        .最近 h5{
+            margin-top:5px;
+            position: relative;
+            left:20px;
+            letter-spacing: 10px;
+            text-align: center;
+            font-size: large;
+            font-family: "Arial" ,"system-ui";
+            overflow: hidden;
+            clear: both;
+        }
+        .最近{
+            height: 326px;
+            width:auto;
+            border: solid rgba(89, 11, 11, 0.12);
+            border-radius: 0 0 19px 19px;
+            display: flex;
+            justify-content: center;
+            background:linear-gradient(45deg,rgba(78, 49, 49, 0.14),rgba(75,89,49,0.34)) ;
+        }
+        .最近 ul{
+            list-style: none;
+
+        }
+        .banner{
+            width:800px;
+            height:450px;
+            margin: auto;
+            border: 10px solid #999;
+            position: absolute;
+            left:320px;
+            top:90px;
+            overflow: hidden;
+            clear:both;
+            z-index: 1;
+            border-radius: 10px;
+        }
+        /* ul标签的样式 */
+        .imglist{
+            position: absolute;
+            z-index: 2;
+        }
+        li{
+            list-style: none;
+            margin-right: 10px;
+            float: left;
+        }
+        .banner img{
+            width: 800px;
+            height: 450px;
+        }
+        /* 圆点导航父级div标签的样式 */
+        .cir{
+            position: absolute;
+            left: 50%;
+            bottom: 15px;
+            transform: translateX(-50%);
+        }
+        /* 圆点导航的设置 */
+        .cir a{
+            display: block;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: green;
+            margin-right: 10px;
+            float: left;
+        }
+        /* 圆点导航点击后样式 */
+        .cir a.hover{
+            background-color: black;
+            opacity: .5;
+        }
+        .推荐{
+            margin: 0;
+            padding: 0;
+            position:absolute;
+            top:580px;
+            left:300px;
+            overflow: hidden;
+            clear: both;
+        }
+        .推荐 ul {
+            float: left;
+            list-style-type:none ;
+
+        }
+        .推荐 ul li {
+            position: relative;
+            float: left;
+            width:270px;
+            height:200px;
+            background-color: rgba(99, 228, 212, 0.7);
+            margin-bottom: 20px;
+            margin-left: 10px;
+            border-radius: 5px;
+            margin-top:20px;
+        }
+        .推荐 ul li:hover{
+            background: linear-gradient(30deg, rgba(0, 117, 128, 0.7), rgba(40, 77, 86, 0.61));
+            box-shadow: 3px 2px 2px 1px rgba(127, 137, 35, 0.48);
+
+
+        }
+        .推荐 ul li a img{
+            width:250px;
+            height:180px;
+            position: relative;
+            left:10px;
+            bottom: -10px;
+            border-radius: 5px;
+
+        }
+        .推荐 h4 {
+            font-family: "Microsoft YaHei UI",sans-serif;
+
+            border-style: none;
+            position:relative;
+            left:30px;
+            font-size: larger;
+            font-weight: 520;
+            color: rgba(12, 45, 10, 0.73);
+            width: 80px;
+            overflow: hidden;
+            clear:both;
+        }
+        .推荐 .line{
+            width:2px;
+            height:40px;
+            display: block;
+            background-color: #B0B0B0;
+            position: absolute;
+            left:10px;
+            top:0;
+            overflow: hidden;
+            clear: both;
+        }
+        .nav-link1{
+            position: absolute;
+            right:200px;
+            font-size: 2px;
+            font-weight:700;
+            font-family:"Microsoft JhengHei";
+            width:50px;
+            display:block;
+        }
+        .nav-link2{
+            position: absolute;
+            right:280px;
+            font-size: 2px;
+            font-weight:700;
+            font-family:"Microsoft JhengHei";
+            width:40px;
+            display:block;
+        }
+        .nav-item1{
+            position: absolute;
+            right:280px;
+            font-size: 20px;
+            font-weight:700;
+            font-family:"Microsoft JhengHei";
+            width:100px;
+            display:block;
+        }
+        .nav-link3{
+            position: absolute;
+            right:200px;
+            font-size: 2px;
+            font-weight:700;
+            font-family:"Microsoft JhengHei";
+            width:80px;
+            display:block;
+        }
+        .用户{
+            position: absolute;
+            right:10px;
+
+        }
+
+    </style>
+</head>
+<body>
+<div class = "nav">
+    <ul>
+        <li class = "食堂概况">   <!-- 这里看每个学部的食堂-->
+            <a href="#">食堂概况</a>
+            <div class="学部食堂">
+                <ul >
+                        <li><a href="#">工学部食堂</a></li>
+                        <li><a href="#">文理学部食堂</a></li>
+                        <li><a href="#">信息学部食堂</a></li>
+                        <li><a href="#">医学部食堂</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class = "发现">   <!-- 这里是发帖子，看帖子区-->
+            <a href="/post">发现</a>
+        </li >
+
+       <li class = "我的">
+            {% if user %}
+                <a href="{{ url_for('user.view', username=user.username) }}"> 我的</a>
+            {% endif %}
+        </li>
+        <li class = "用户" >
+            <a href="/"><img src="../static/images/标志.png" alt = "user" height = 60px ></a>
+        </li>
+    </ul>
+    <ul class="navbar-nav">
+        {% if user %}
+        <li class="nav-item1">
+            <sqan class="nav-link" >{{user.username}}</sqan>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link3" href="{{ url_for('user.logout') }}">退出登录</a>
+            {% else %}
+        <li class="nav-item">
+        <a class="nav-link1" href="{{ url_for('user.login') }}">登录</a>
+    </li>
+        <li class="nav-item2">
+            <a class="nav-link2" href="{{ url_for('user.register') }}">注册</a>
+        </li>
+        {% endif %}
+    </ul>
+</div>
+
+<div class="banner">
+    <ul class="imglist">
+        <li><img src="../static/images/mei.jpg" alt=""></li>
+        <li><img src="../static/images/xin4.jpg" alt=""></li>
+        <li><img src="../static/images/xin21.jpg" alt=""></li>
+        <li><img src="../static/images/xin22.jpg" alt=""></li>
+    </ul>
+    <div class="cir"></div>
+</div>
+<script src="../static/js/script.js"> </script>
+<div class = "推荐">
+    <div class = "line"></div>
+    <h4>为你推荐</h4>
+    <ul class="推荐-图片">
+        <li><a href="#"><img src="../static/images/信三-麻辣香锅.png" alt=" "></a></li>
+        <li><a href="#"><img src="../static/images/信二-三鲜砂锅面.png" alt=" "></a></li>
+        <li><a href="#"><img src="../static/images/信四-饭团.png" alt=" "></a></li>
+        <li><a href="#"><img src="../static/images/信息学部四食堂牛肉拉面.jpg" alt=" "></a></li>
+        <li><a href="#"><img src="../static/images/饺子.jpg" alt=" "></a></li>
+        <li><a href="#"><img src="../static/images/武大信2-麻辣烫.jpg" alt=" "></a></li>
+
+
+    </ul>
+</div>
+</body>
+</html>

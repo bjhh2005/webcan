@@ -1,0 +1,239 @@
+{% block head %}
+<meta charset="utf-8">
+
+<link rel="stylesheet" href="{{ url_for('static',filename='css/detail.css') }}">
+<style>
+    .nav{
+        width: 100%;
+        height: 60px;
+        background-color: #006600;
+        margin-left: 0;
+        display: block;
+        margin-bottom: 0;
+        position:absolute;
+        top:0;
+    }
+    a{
+        text-decoration: none;
+    }
+    .nav ul li{
+        float: left;
+        list-style-type: none;
+        padding: 0 50px ;
+        line-height: 60px;
+    }
+    .nav>ul>li>a {
+        color:lightgray;
+        font-size: 20px;
+    }
+
+    .学部食堂{
+        position: absolute;
+        padding-left: 0;
+        margin-top:0;
+        height:60px;
+        width: 100%;
+        left:0;
+        background-color: rgb(249,249,248);
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+        border-bottom: 1px solid gray;
+        overflow: hidden;
+        clear: both;
+        display: none;
+    }
+    .学部食堂 ul{
+        position: absolute;
+        left:0;
+
+        overflow: hidden;
+        clear: both;
+        z-index: 200;
+    }
+    .学部食堂 ul li{
+        list-style-type: none;
+        float: left;
+        margin-left: 0;
+
+    }
+    .学部食堂 ul li a{
+        color: black;
+        font-size: 15px;
+        padding-left: 100px;
+
+    }
+    .食堂概况:hover>.学部食堂{
+        display: block;
+        z-index: 200;
+    }
+    .食堂概况:hover>.学部食堂>ul>li>a:hover{
+        color: darkgreen;
+    }
+    .nav>ul>li>a:hover{
+        color: white;
+    }
+    .用户{
+        position: absolute;
+        right:10px;
+
+    }
+        .row .col-10{
+            position: relative;
+            top:50px;
+            margin: 20px 40px;
+            border: #0c5460;
+            width:90%;
+            height:500px;
+            border-radius: 40px;
+            background:linear-gradient(45deg,lightgrey, rgba(255, 255, 255, 0.89));
+        }
+        .btn-primary{
+            width:80px;
+            height:40px;
+            background-color: #b4ac4d;
+            border-radius:20px;
+            position: relative;
+            top:-50px;
+        }
+        .form-control{
+            height:40px;
+            width:600px;
+            border-radius: 15px;
+
+
+        }
+        .comment-group li{
+            border-radius: 15px;
+            width:90%;
+            height:100px;
+            background: white;
+        }
+        .blog-content{
+            border-radius: 15px;
+            width:90%;
+            height:100px;
+            background: white;
+        }
+        .nav-item1{
+            position: absolute;
+            right:280px;
+            font-size: 20px;
+            font-weight:700;
+            font-family:"Microsoft JhengHei";
+            width:100px;
+            display:block;
+        }
+        .nav-link3{
+            position: absolute;
+            right:200px;
+            font-size: 2px;
+            font-weight:700;
+            font-family:"Microsoft JhengHei";
+            width:80px;
+            display:block;
+        }
+        .nav-link1{
+            position: absolute;
+            right:280px;
+            font-size: 20px;
+            font-weight:700;
+            font-family:"Microsoft JhengHei";
+            width:100px;
+            display:block;
+        }
+        .nav-link2{
+            position: absolute;
+            right:200px;
+            font-size: 2px;
+            font-weight:700;
+            font-family:"Microsoft JhengHei";
+            width:80px;
+            display:block;
+        }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class = "nav">
+    <ul>
+        <li class = "食堂概况">   <!-- 这里看每个学部的食堂-->
+            <a href="#">食堂概况</a>
+            <div class="学部食堂">
+                <ul >
+                    <li><a href="#">工学部食堂</a></li>
+                    <li><a href="#">文理学部食堂</a></li>
+                    <li><a href="#">信息学部食堂</a></li>
+                    <li><a href="#">医学部食堂</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class = "发现">   <!-- 这里是发帖子，看帖子区-->
+            <a href="/post">发现</a>
+        </li >
+
+
+        <li class = "我的">
+            {% if user %}
+            <a href="{{ url_for('user.view', username=user.username) }}"> 我的</a>
+            {% endif %}
+        </li>
+        <li class = "用户" >
+            <a href="/"><img src="../static/images/标志.png" alt = "user" height = 60px ></a>
+        </li>
+    </ul>
+    <ul class="navbar-nav">
+        {% if user %}
+        <li class="nav-item1">
+            <sqan class="nav-link" >{{user.username}}</sqan>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link3" href="{{ url_for('user.logout') }}">退出登录</a>
+            {% else %}
+        <li class="nav-item">
+            <a class="nav-link1" href="{{ url_for('user.login') }}">登录</a>
+        </li>
+        <li class="nav-item2">
+            <a class="nav-link2" href="{{ url_for('user.register') }}">注册</a>
+        </li>
+        {% endif %}
+    </ul>
+</div>
+
+	    <div class="row" style="margin-top: 20px;">
+            <div class="col"></div>
+            <div class="col-10" style="background-color: #fff;padding: 20px;">
+                <h3 class="page-title">{{blog.title}}</h3>
+                <p class="question-info">
+                    <span>作者：{{blog.author.username}}</span>
+                    <span>时间：{{ blog.create_time}}</span>
+                </p>
+                <hr>
+                <p class="blog-content">{{blog.content}}</p>
+                <hr>
+                <h4 class="comment-group-title">评论（{{ blog.comments|length }}）：</h4>
+                <form action="{{ url_for('post.public_comment') }}" method="post">
+                    <div class="form-group">
+                        <input type="text" placeholder="请填写评论" name="content" class="form-control">
+                        <input type="hidden" name="blog_id" value="{{ blog.id }}">
+                    </div>
+                    <div class="form-group" style="text-align: right;">
+                        <button class="btn-primary">评论</button>
+                    </div>
+                </form>
+                <ul class="comment-group">
+                    {% for comment in blog.comments %}
+                    <li>
+                        <div class="user-info">
+                            <img class="avatar" src="{{url_for('static',filename='images/avatar.jpg')}}" alt="">
+                            <span class="username">{{ comment.author.username }}</span>
+                            <span class="create-time">{{ comment.create_time}}</span>
+                        </div>
+                        <p class="comment-content">{{comment.content}}</p>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col"></div>
+        </div>
+{% endblock %}
+
